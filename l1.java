@@ -32,6 +32,8 @@ public class l1 {
 
         return find(root.left, data) || find(root.right, data);
     }
+    
+    // Node to Root Path
 
     public static boolean nodeToRootPath(TreeNode root, int data, ArrayList<TreeNode> path) {
         if (root == null)
@@ -53,5 +55,34 @@ public class l1 {
         nodeToRootPath(root, data, path);
         return path;
       }
+    
+    // Root to All Leaf Path
+
+    public static void rootToAllLeafPath(TreeNode root, ArrayList<Integer> smallAns,
+                                       ArrayList<ArrayList<Integer>> ans) {
+    if (root == null)
+      return;
+    if (root.left == null && root.right == null) {
+      ArrayList<Integer> base = new ArrayList<>(smallAns);
+      base.add(root.val);
+      ans.add(base);
+      return;
+    }
+
+    smallAns.add(root.val);
+
+    rootToAllLeafPath(root.left, smallAns, ans);
+    rootToAllLeafPath(root.right, smallAns, ans);
+
+    smallAns.remove(smallAns.size() - 1);
+  }
+
+  public static ArrayList<ArrayList<Integer>> rootToAllLeafPath(TreeNode root) {
+    ArrayList<ArrayList<Integer>> ans = new ArrayList<>();
+    ArrayList<Integer> smallAns = new ArrayList<Integer>();
+
+    rootToAllLeafPath(root, smallAns, ans);
+    return ans;
+  }
 
 }
