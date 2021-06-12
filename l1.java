@@ -84,5 +84,37 @@ public class l1 {
     rootToAllLeafPath(root, smallAns, ans);
     return ans;
   }
+    
+    // Single Child Parent in Binary Tree
+public static void exactlyOneChild(TreeNode node, ArrayList<Integer> ans) {
+  if (node == null || (node.left == null && node.right == null))
+    return;
 
+  if (node.left == null || node.right == null)
+    ans.add(node.val);
+
+  exactlyOneChild(node.left, ans);
+  exactlyOneChild(node.right, ans);
+
+}
+
+public static ArrayList<Integer> exactlyOneChild(TreeNode root) {
+  ArrayList<Integer> ans = new ArrayList<>();
+  exactlyOneChild(root, ans);
+  return ans;
+}
+
+//Count Single Child Parent 
+public static int countExactlyOneChild(TreeNode node) {
+  if (node == null || (node.left == null && node.right == null))
+    return 0;
+
+  int left = countExactlyOneChild(node.left);
+  int right = countExactlyOneChild(node.right);
+  int sum = left + right;
+  if (node.left == null || node.right == null)
+    sum += 1;
+  return sum;
+}
+    
 }
