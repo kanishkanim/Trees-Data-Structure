@@ -1,4 +1,4 @@
-//import java.util.ArrayList;
+import java.util.ArrayList;
 
 public class l1 {
 
@@ -33,12 +33,25 @@ public class l1 {
         return find(root.left, data) || find(root.right, data);
     }
 
-    // public static ArrayList<TreeNode> NodeToRootPath(TreeNode root, int data) {
-
-    // }
-
-    // public static ???? NodeToRootPath(TreeNode root, int data,ArrayList<TreeNode> ans) {
-
-    // }
+    public static boolean nodeToRootPath(TreeNode root, int data, ArrayList<TreeNode> path) {
+        if (root == null)
+          return false;
+        if (root.val == data) {
+          path.add(root);
+          return true;
+        }
+    
+        boolean res = nodeToRootPath(root.left, data, path) || nodeToRootPath(root.right, data, path);
+        if (res)
+          path.add(root);
+    
+        return res;
+      }
+    
+      public static ArrayList<TreeNode> nodeToRootPath(TreeNode root, int data) {
+        ArrayList<TreeNode> path = new ArrayList<>();
+        nodeToRootPath(root, data, path);
+        return path;
+      }
 
 }
